@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app3';
+  username: string = "";
+  password: string = "";
+  msg: string = "";
+  constructor(@Inject(LoginService) private loginService:LoginService){
+
+  }
+  CheckLogin(){
+    if(this.loginService.checkUnameAndPwd(this.username,this.password)==true){
+      this.msg="Login Successful!!.....";
+    }else{
+      this.msg="Invakid Credentials.....";
+
+    }
+  }
 }
